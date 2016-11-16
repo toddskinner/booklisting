@@ -30,6 +30,7 @@ public final class QueryUtils {
      * parsing a JSON response.
      */
 
+
     public static List<Book> extractBooksFromJson(String booksJSON) {
 
         // If the JSON string is empty or null, then return early.
