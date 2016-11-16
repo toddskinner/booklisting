@@ -2,7 +2,10 @@ package com.example.android.booklisting;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.ImageReader;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static android.R.attr.bitmap;
 
 /**
  * Created by toddskinner on 11/15/16.
@@ -32,8 +37,9 @@ public class BookListAdapter extends ArrayAdapter<Book> {
 
         final Book currentBook = getItem(position);
 
-        //ImageView bookCoverImageView = (ImageView) convertView.findViewById(R.id.book_cover);
-        //bookCoverImageView.setText(String.valueOf(formatImage(currentBook.getBookCover())));
+        ImageView bookCoverImageView = (ImageView) convertView.findViewById(R.id.book_cover);
+        Uri bookCoverUri = Uri.parse(currentBook.getBookCover());
+        bookCoverImageView.setImageURI(bookCoverUri);
 
         TextView titleTextView = (TextView) convertView.findViewById(R.id.title);
         String title = currentBook.getTitle();

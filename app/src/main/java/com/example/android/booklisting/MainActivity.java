@@ -13,6 +13,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView emptyTextView;
     private TextView noConnectionTextView;
     private ProgressBar progressBar;
+    private ListView listView;
+    private String combinedRequestUrl;
 
     /** URL for book data from Google Books API */
-    private static final String GOOGLE_BOOKS_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?q=finance&maxResults=10";
+    private static final String GOOGLE_BOOKS_REQUEST_URL_PART1 =
+            "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String GOOGLE_BOOKS_REQUEST_URL_PART2 =
+            "&maxResults=10";
 
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
@@ -46,11 +51,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //found code below on StackOverflow
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        ListView listView = (ListView) findViewById(R.id.list);
+        listView = (ListView) findViewById(R.id.list);
         emptyTextView = (TextView) findViewById(R.id.empty_list);
         listView.setEmptyView(emptyTextView);
         progressBar = (ProgressBar) findViewById(R.id.loading_indicator);
+        progressBar.setVisibility(View.GONE);
+
+
+        Button searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                submitTopic(listView);
+            }
+        });
+    }
+
+    public void submitTopic(View view) {
+
+        TextView searchText = (TextView) findViewById(R.id.search_editText);
+        String searchTerm = searchText.getText().toString();
+        combinedRequestUrl = GOOGLE_BOOKS_REQUEST_URL_PART1 + searchTerm + GOOGLE_BOOKS_REQUEST_URL_PART2;
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -77,14 +101,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         listView.setAdapter(adapter);
 
-        /*Button browse = (Button) findViewById(R.id.search_button);
-        browse.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-            }
-        });*/
-
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
@@ -106,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<Book>> onCreateLoader(int id, Bundle args) {
-        return new BookLoader(this, GOOGLE_BOOKS_REQUEST_URL);
+        progressBar.setVisibility(View.VISIBLE);
+        return new BookLoader(this, combinedRequestUrl);
     }
 
     @Override

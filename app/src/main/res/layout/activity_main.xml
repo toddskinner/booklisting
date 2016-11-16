@@ -7,17 +7,29 @@
     android:orientation="vertical"
     tools:context="com.example.android.booklisting.MainActivity">
 
-<!--    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginBottom="2dp"/>
+    <LinearLayout
+        style="@style/boxesStyle">
+
+        <TextView
+            style="@style/questionStyle"
+            android:text="@string/search_question" />
+
+        <EditText
+            android:id="@+id/search_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:paddingLeft="8dp"
+            android:backgroundTint="@color/grey"
+            android:layout_marginBottom="6dp"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/search_button"
-        android:text="Search" />-->
+        android:text="Search" />
 
     <ListView
         android:id="@+id/list"
