@@ -9,12 +9,14 @@ public class Book {
     private String mBookCover;
     private String mAuthor;
     private String mDescription;
+    private String mInfoLink;
 
-    public Book (String title, String bookCover, String author, String description){
+    public Book (String title, String bookCover, String author, String description, String infoLink){
         mTitle = title;
         mBookCover = bookCover;
         mAuthor = author;
         mDescription = description;
+        mInfoLink = infoLink;
     }
 
     public String getTitle(){
@@ -30,4 +32,6 @@ public class Book {
     }
 
     public String getDescription() { return mDescription; }
+
+    public String getInfoLink() { return mInfoLink; }
 }

@@ -54,9 +54,10 @@ public final class QueryUtils {
                 String title = jsonBookVolumeInfo.getString("title");
                 String authors = jsonBookVolumeInfo.getString("authors");
                 String description = jsonBookVolumeInfo.getString("description");
+                String infoLink = jsonBookVolumeInfo.getString("infoLink");
                 JSONObject jsonImageLinks = jsonBookVolumeInfo.getJSONObject("imageLinks");
                 String smallThumbUrl = jsonImageLinks.getString("smallThumbnail");
-                books.add(new Book(title, smallThumbUrl, authors, description));
+                books.add(new Book(title, smallThumbUrl, authors, description, infoLink));
             }
 
         } catch (JSONException e) {

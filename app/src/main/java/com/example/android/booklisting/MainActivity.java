@@ -24,6 +24,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.data;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>>{
 
     public static final String LOG_TAG = MainActivity.class.getName();
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ProgressBar progressBar;
     private ListView listView;
     private String combinedRequestUrl;
+    private int counter = 0;
 
     /** URL for book data from Google Books API */
     private static final String GOOGLE_BOOKS_REQUEST_URL_PART1 =
@@ -65,13 +68,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                counter++;
                 submitTopic(listView);
             }
         });
     }
 
     public void submitTopic(View view) {
-
         TextView searchText = (TextView) findViewById(R.id.search_editText);
         String searchTerm = searchText.getText().toString();
         combinedRequestUrl = GOOGLE_BOOKS_REQUEST_URL_PART1 + searchTerm + GOOGLE_BOOKS_REQUEST_URL_PART2;
@@ -89,7 +92,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(BOOK_LOADER_ID, null, this);
+            if(counter == 0){
+                loaderManager.initLoader(BOOK_LOADER_ID, null, this);
+            } else {
+                loaderManager.restartLoader(BOOK_LOADER_ID, null, this);
+            }
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -100,23 +107,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         adapter = new BookListAdapter(this, new ArrayList<Book>());
 
         listView.setAdapter(adapter);
+        searchText.setText("");
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
-                // Find the current earthquake that was clicked on
-                Earthquake currentEarthquake = adapter.getItem(position);
+                // Find the current book that was clicked on
+                Book currentBook = adapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                Uri bookUri = Uri.parse(currentBook.getInfoLink());
 
                 // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, bookUri);
 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
             }
-        });*/
+        });
 
     }
 
