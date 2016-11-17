@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 loaderManager.initLoader(BOOK_LOADER_ID, null, this);
             } else {
                 loaderManager.restartLoader(BOOK_LOADER_ID, null, this);
+                emptyTextView.setText("");
             }
         } else {
             // Otherwise, display error
