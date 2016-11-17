@@ -12,14 +12,15 @@
 
         <ImageView
             android:id="@+id/book_cover"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
             android:layout_gravity="center_vertical"
             android:gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <TextView
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/textColorDescription"
+                android:textColor="@color/textColorTitleAndAuthor"
                 android:textSize="10sp"
                 tools:text="Long placeholder location that should wrap to more than 2 lines of text" />
 

@@ -24,7 +24,9 @@ public class Book {
     }
 
     public String getAuthor(){
-        return mAuthor;
+        String authorLessQuotations = mAuthor.replace("\"", " ");
+        String authorLessCommas = authorLessQuotations.replace(",", "&");
+        return "By" + " " + authorLessCommas.substring(2 , authorLessCommas.length()-2);
     }
 
     public String getBookCover(){
