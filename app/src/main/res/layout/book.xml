@@ -5,43 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/book_cover"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/textColorEarthquakeLocation"
-            android:maxLines="2"
-            android:textAllCaps="true"
-            android:textSize="16sp"
-            tools:text="On the Road" />
+        <ImageView
+            android:id="@+id/book_cover"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center" />
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textColorEarthquakeLocation"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="12sp"
-            tools:text="By Jack Kerouac" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:textColor="@color/textColorEarthquakeDetails"
-            android:maxLines="2"
-            android:textSize="10sp"
-            tools:text="Long placeholder location that should wrap to more than 2 lines of text" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="2"
+                android:textAllCaps="true"
+                android:textColor="@color/textColorTitleAndAuthor"
+                android:textSize="16sp"
+                tools:text="On the Road" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/textColorTitleAndAuthor"
+                android:textSize="12sp"
+                tools:text="By Jack Kerouac" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/textColorDescription"
+                android:textSize="10sp"
+                tools:text="Long placeholder location that should wrap to more than 2 lines of text" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

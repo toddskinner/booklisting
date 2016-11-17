@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Book Listing</string>
-    <string name="search_question">Subject?</string>
+    <string name="search_question">What Do You Want To Read About?</string>
     <string name="empty_list">No books found</string>
+    <string name="find_books">Find Some Books!</string>
     <string name="no_connection_message">No internet connection found</string>
 </resources>

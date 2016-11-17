@@ -41,10 +41,8 @@ public class BookListAdapter extends ArrayAdapter<Book> {
 
         ImageView bookCoverImageView = (ImageView) convertView.findViewById(R.id.book_cover);
 
+        //found by googling and stackoverflow
         Picasso.with(mCon).load(currentBook.getBookCover()).into(bookCoverImageView);
-
-        //Uri bookCoverUri = Uri.parse(currentBook.getBookCover());
-        //bookCoverImageView.setImageURI(bookCoverUri);
 
         TextView titleTextView = (TextView) convertView.findViewById(R.id.title);
         String title = currentBook.getTitle();
