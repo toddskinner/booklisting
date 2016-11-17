@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class BookListAdapter extends ArrayAdapter<Book> {
 
     public BookListAdapter(Activity context, ArrayList<Book> books){
         super(context, 0, books);
+        mCon = context;
     }
 
     @Override
@@ -38,8 +40,11 @@ public class BookListAdapter extends ArrayAdapter<Book> {
         final Book currentBook = getItem(position);
 
         ImageView bookCoverImageView = (ImageView) convertView.findViewById(R.id.book_cover);
-        Uri bookCoverUri = Uri.parse(currentBook.getBookCover());
-        bookCoverImageView.setImageURI(bookCoverUri);
+
+        Picasso.with(mCon).load(currentBook.getBookCover()).into(bookCoverImageView);
+
+        //Uri bookCoverUri = Uri.parse(currentBook.getBookCover());
+        //bookCoverImageView.setImageURI(bookCoverUri);
 
         TextView titleTextView = (TextView) convertView.findViewById(R.id.title);
         String title = currentBook.getTitle();
